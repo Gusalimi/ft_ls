@@ -6,18 +6,19 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:58 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 00:26:01 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 00:33:36 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 int ft_ls(t_data data, t_path *paths) {
-    (void)data;
-    (void)paths;
-    int names = paths->next ? 1 : 0;
-    t_path *tmp = paths;
-    DIR *dir;
+    // TODO: protect opendir, readdir and NULL paths
+    if (!paths)
+        return (1);
+    int		names = paths->next ? 1 : 0;
+    t_path	*tmp = paths;
+    DIR		*dir;
     struct dirent *entry;
     while (tmp) {
         dir = opendir(tmp->content);
@@ -49,12 +50,12 @@ int main(int argc, char *argv[]) {
 
     paths = get_paths(argc, argv);
     t_path *tmp = paths;
-    printf("==== paths ====\n");
+    printf("\n==== paths ====\n");
     while (tmp) {
         printf("%s\n", tmp->content);
         tmp = tmp->next;
     }
 
-    printf("==== ft_ls ====\n");
+    printf("\n==== ft_ls ====\n");
     return ft_ls(data, paths);
 }
