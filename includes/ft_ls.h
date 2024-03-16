@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:45:26 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 00:32:01 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 00:37:02 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@
 #define MAGENTA "\x1B[35m"
 #define CYAN    "\x1B[36m"
 #define WHITE   "\x1B[37m"
+
+#define BOLDBLACK   "\033[1m\033[30m"
+#define BOLDRED     "\033[1m\033[31m"
+#define BOLDGREEN   "\033[1m\033[32m"
+#define BOLDYELLOW  "\033[1m\033[33m"
+#define BOLDBLUE    "\033[1m\033[34m"
+#define BOLDMAGENTA "\033[1m\033[35m"
+#define BOLDCYAN    "\033[1m\033[36m"
+#define BOLDWHITE   "\033[1m\033[37m"
 
 
 // ==== STRUCTURES ==== //

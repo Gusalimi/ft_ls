@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:58 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 00:33:36 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 00:37:23 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int ft_ls(t_data data, t_path *paths) {
     if (!paths)
         return (1);
     int		names = paths->next ? 1 : 0;
-    t_path	*tmp = paths;
+    t_path  *tmp = paths;
     DIR		*dir;
     struct dirent *entry;
     while (tmp) {
@@ -25,8 +25,11 @@ int ft_ls(t_data data, t_path *paths) {
         if (names)
             printf("%s:\n", tmp->content);
         while ((entry = readdir(dir))) {
+			// if (entry->d_type == DT_DIR)
+			// 	printf(BOLDCYAN);
             if (data.a || entry->d_name[0] != '.')
                 printf("%s\n", entry->d_name);
+			// printf(RESET);
         }
         closedir(dir);
         tmp = tmp->next;
