@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:52 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/16 23:44:53 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 00:18:51 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,14 @@ t_path  *get_paths(int argc, char *argv[]) {
             ft_lstadd_back(&paths, tmp);
         }
         i++;
+    }
+    if (!paths) {
+        tmp = ft_lstnew(".");
+        if (!tmp) {
+            printf("malloc error\n");
+            exit(1);
+        }
+        ft_lstadd_back(&paths, tmp);
     }
     return paths;
 }
