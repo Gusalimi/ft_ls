@@ -21,11 +21,11 @@
 #  define BUFFER_SIZE 100
 # endif
 
-typedef struct s_line
+typedef struct s_path
 {
 	char			*content;
-	struct s_line	*next;
-}					t_line;
+	struct s_path	*next;
+}					t_path;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -45,11 +45,11 @@ int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(char *s, int fd);
 int		ft_get_len(int n);
 int		ft_get_ulen(unsigned int n);
-int		ft_lstsize(t_line *lst);
+int		ft_lstsize(t_path *lst);
 int		ft_printf(const char *format, ...);
-int		read_to_list(int fd, t_line **list);
-int		has_nl(t_line *list);
-int		ft_strlen_and_free(const char *s, t_line **elem, int behavior);
+int		read_to_list(int fd, t_path **list);
+int		has_nl(t_path *list);
+int		ft_strlen_and_free(const char *s, t_path **elem, int behavior);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
@@ -59,10 +59,10 @@ char	*ft_strdup(const char *s1);
 char	*ft_itoa(int n);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-char	*clear_list(t_line **list, int behavior);
+char	*clear_list(t_path **list, int behavior);
 char	*get_next_line(int fd);
 char	*ft_strdup(const char *s1);
-char	*get_lline(t_line *list);
+char	*get_lline(t_path *list);
 char	**ft_split(char const *s, char c);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_bzero(void *s, size_t n);
@@ -72,19 +72,19 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_calloc(size_t count, size_t size);
-void	ft_lstadd_front(t_line **lst, t_line *new);
-void	ft_lstadd_back(t_line **lst, t_line *new);
-void	ft_lstdelone(t_line *lst, void (*del)(void *));
-void	ft_lstclear(t_line **lst, void (*del)(void *));
-void	ft_lstiter(t_line *lst, void (*f)(void *));
+void	ft_lstadd_front(t_path **lst, t_path *new);
+void	ft_lstadd_back(t_path **lst, t_path *new);
+void	ft_lstdelone(t_path *lst, void (*del)(void *));
+void	ft_lstclear(t_path **lst, void (*del)(void *));
+void	ft_lstiter(t_path *lst, void (*f)(void *));
 void	parse_arg(const char *format, va_list args, int *counter);
-void	clear_list2(t_line **current, t_line **list);
+void	clear_list2(t_path **current, t_path **list);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-t_line	*ft_lstnew(void *content);
-t_line	*ft_lstlast(t_line *lst);
-t_line	*ft_lstmap(t_line *lst, void *(*f)(void *), void (*del)(void *));
-t_line	*lst_getlast(t_line *list);
+t_path	*ft_lstnew(void *content);
+t_path	*ft_lstlast(t_path *lst);
+t_path	*ft_lstmap(t_path *lst, void *(*f)(void *), void (*del)(void *));
+t_path	*lst_getlast(t_path *list);
 
 #endif

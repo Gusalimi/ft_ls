@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_lstsize(t_line *lst)
+int	ft_lstsize(t_path *lst)
 {
 	int	i;
 

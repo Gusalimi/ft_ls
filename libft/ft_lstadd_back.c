@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_line **lst, t_line *new)
+void	ft_lstadd_back(t_path **lst, t_path *new)
 {
-	t_line	*current;
+	t_path	*current;
 
 	if (*lst == NULL)
 	{

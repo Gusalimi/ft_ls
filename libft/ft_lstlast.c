@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-t_line	*ft_lstlast(t_line *lst)
+t_path	*ft_lstlast(t_path *lst)
 {
 	if (lst == NULL)
 		return (NULL);

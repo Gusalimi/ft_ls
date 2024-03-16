@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-void	ft_lstclear(t_line **lst, void (*del)(void *))
+void	ft_lstclear(t_path **lst, void (*del)(void *))
 {
-	t_line	*tmp;
+	t_path	*tmp;
 
 	if (!lst || !del)
 		return ;

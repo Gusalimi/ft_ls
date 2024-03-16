@@ -1,15 +1,15 @@
 # ======= FILES ========
 NAME		= ft_ls
 OBJDIR		= .objFiles
-FILES		= main
-# SRCS		= $(FILES:=.cpp)
-OBJS		= $(addprefix $(OBJDIR)/, $(FILES:=.o))
+FILES		= main parsing
+SRCS		= $(addprefix srcs/, $(FILES:=.cpp))
+OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 LIBFT		= libft/libft.a
 
 # ======= COMPILATION ========
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
-INCLUDE	= -I libft
+INCLUDE	= -I libft -I includes
 RM		= rm -rf
 
 
@@ -32,6 +32,7 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(OPTS) -o $(NAME)
 	@printf "$(CURSIVE)$(GREEN)- Executable ready.\n$(RESET)"
+	@$(MAKE) clean
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)

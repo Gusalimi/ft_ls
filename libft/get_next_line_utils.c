@@ -30,7 +30,7 @@ char	*ft_strdup(const char *s1)
 	return (s2);
 }
 
-t_line	*lst_getlast(t_line *list)
+t_path	*lst_getlast(t_path *list)
 {
 	if (list == NULL)
 		return (NULL);
@@ -39,7 +39,7 @@ t_line	*lst_getlast(t_line *list)
 	return (list);
 }
 
-int	ft_strlen_and_free(const char *s, t_line **elem, int behavior)
+int	ft_strlen_and_free(const char *s, t_path **elem, int behavior)
 {
 	int	i;
 
@@ -58,10 +58,10 @@ int	ft_strlen_and_free(const char *s, t_line **elem, int behavior)
 	}
 }
 
-char	*clear_list(t_line **list, int behavior)
+char	*clear_list(t_path **list, int behavior)
 {
-	t_line	*current;
-	t_line	*next;
+	t_path	*current;
+	t_path	*next;
 
 	if (*list == NULL)
 		return (NULL);
@@ -84,7 +84,7 @@ char	*clear_list(t_line **list, int behavior)
 	return (NULL);
 }
 
-void	clear_list2(t_line **current, t_line **list)
+void	clear_list2(t_path **current, t_path **list)
 {
 	char	*tmp;
 	int		i;

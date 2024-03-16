@@ -14,7 +14,7 @@
 
 char	*get_next_line(int fd)
 {
-	static t_line	*list[4096];
+	static t_path	*list[4096];
 	char			*line;
 	int				readed;
 
@@ -38,16 +38,16 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	read_to_list(int fd, t_line **list)
+int	read_to_list(int fd, t_path **list)
 {
 	char	buffer[BUFFER_SIZE + 1];
-	t_line	*new_elem;
+	t_path	*new_elem;
 	int		i;
 
 	i = 0;
 	while (i <= BUFFER_SIZE)
 		buffer[i++] = 0;
-	new_elem = malloc(sizeof(t_line));
+	new_elem = malloc(sizeof(t_path));
 	if (new_elem == NULL)
 		return (-1);
 	i = read(fd, buffer, BUFFER_SIZE);
@@ -67,7 +67,7 @@ int	read_to_list(int fd, t_line **list)
 	return (i);
 }
 
-int	get_len(t_line *list)
+int	get_len(t_path *list)
 {
 	int	len;
 	int	i;
@@ -89,7 +89,7 @@ int	get_len(t_line *list)
 	return (len);
 }
 
-char	*get_lline(t_line *list)
+char	*get_lline(t_path *list)
 {
 	char	*line;
 	int		i;
@@ -117,9 +117,9 @@ char	*get_lline(t_line *list)
 	return (line);
 }
 
-int	has_nl(t_line *list)
+int	has_nl(t_path *list)
 {
-	t_line	*last;
+	t_path	*last;
 	int		i;
 
 	if (list == NULL)

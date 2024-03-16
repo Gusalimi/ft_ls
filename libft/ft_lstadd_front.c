@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_line **lst, t_line *new)
+void	ft_lstadd_front(t_path **lst, t_path *new)
 {
 	if (!lst)
 		return ;
