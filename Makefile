@@ -1,7 +1,7 @@
 # ======= FILES ========
 NAME		= ft_ls
 OBJDIR		= .objFiles
-FILES		= main parsing get_entries error
+FILES		= main parsing get_entries sort error
 SRCS		= $(addprefix srcs/, $(FILES:=.cpp))
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 LIBFT		= libft/libft.a

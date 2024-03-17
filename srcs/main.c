@@ -6,69 +6,116 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:58 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 21:35:03 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 22:54:13 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int ft_ls(t_data data, t_path *paths) {
-    // TODO: protect opendir, readdir and NULL paths
-    if (!paths)
-        return (1);
-    int		names = paths->next ? 1 : 0;
-    t_path  *tmp = paths;
-    DIR		*dir;
-    struct dirent *entry;
-    while (tmp) {
-        dir = opendir(tmp->content);
-        if (names)
-            printf("%s:\n", tmp->content);
-        while ((entry = readdir(dir))) {
-			// if (entry->d_type == DT_DIR)
-			// 	printf(BOLDCYAN);
-            if (data.a || entry->d_name[0] != '.')
-                printf("%s\n", entry->d_name);
-			// printf(RESET);
-        }
-        closedir(dir);
-        tmp = tmp->next;
-        if (names && tmp)
-            printf("\n");
+void reverseList(t_entry **head) {
+    t_entry *prev = NULL;
+    t_entry *current = *head;
+    t_entry *next = NULL;
+
+    while (current != NULL) {
+        next = current->next;  // Store the next node
+        current->next = prev;  // Reverse the link
+
+        // Move pointers one position ahead
+        prev = current;
+        current = next;
     }
-    return 0;
+
+    *head = prev;  // Update the head to point to the new first node
+}
+
+t_entry* merge(t_entry *left, t_entry *right) {
+    if (!left) return right;
+    if (!right) return left;
+
+    if (left->stat.st_mtime > right->stat.st_mtime ||
+        (left->stat.st_mtime == right->stat.st_mtime && strcmp(left->entry->d_name, right->entry->d_name) >= 0)) {
+        left->next = merge(left->next, right);
+        return left;
+    } else {
+        right->next = merge(left, right->next);
+        return right;
+    }
+}
+
+void split(t_entry *head, t_entry **left, t_entry **right) {
+    t_entry *fast, *slow;
+    slow = head;
+    fast = head->next;
+
+    while (fast != NULL) {
+        fast = fast->next;
+        if (fast != NULL) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+
+    *left = head;
+    *right = slow->next;
+    slow->next = NULL;
+}
+
+void mergeSort(t_entry **head) {
+    t_entry *cur = *head;
+    t_entry *left, *right;
+
+    if (cur == NULL || cur->next == NULL)
+        return;
+
+    split(cur, &left, &right);
+    mergeSort(&left);
+    mergeSort(&right);
+    *head = merge(left, right);
+}
+
+void printList(t_entry *head) {
+    while (head) {
+        // char modified_time[20];
+        // strftime(modified_time, sizeof(modified_time), "%Y-%m-%d %H:%M:%S", localtime(&(head->stat.st_mtime)));
+        // printf("%s\t%s\t%s\n", head->entry->d_name, modified_time, head->path);
+        printf("%s ", head->entry->d_name);
+        head = head->next;
+    }
+    printf("\n");
+}
+
+int ft_ls(t_path *paths, t_data data)
+{
+    t_path *tmp = paths;
+    t_entry *entry = NULL;
+    while (tmp) {
+        // printf("\n%s:\n", tmp->content);
+        entry = tmp->entries;
+        if (data.t)
+            mergeSort(&entry);
+        if (data.r)
+            reverseList(&entry);
+        printList(entry);
+        tmp = tmp->next;
+    }
+    return (0);
 }
 
 int main(int argc, char *argv[]) {
     t_data data;
     t_path *paths = NULL;
-    t_entry *entry = NULL;
 
     data = get_options(argc, argv);
-    printf("==== data ====\n");
-    printf("l : %d\n", data.l);
-    printf("a : %d\n", data.a);
-    printf("r : %d\n", data.r);
-    printf("R : %d\n", data.R);
-    printf("t : %d\n", data.t);
+    // printf("==== data ====\n");
+    // printf("l : %d\n", data.l);
+    // printf("a : %d\n", data.a);
+    // printf("r : %d\n", data.r);
+    // printf("R : %d\n", data.R);
+    // printf("t : %d\n", data.t);
 
     paths = get_paths(argc, argv);
     get_entries(paths, data);
-    t_path *tmp = paths;
-    printf("\n==== paths ====\n");
-    while (tmp) {
-        printf("\n%s:\n", tmp->content);
-        entry = tmp->entries;
-        while (entry) {
-            struct stat buf;
-            stat(entry->path, &buf);
-            printf("%s [%d]\n", entry->entry->d_name, entry->entry->d_type);
-            if (entry->entry->d_type == DT_LNK)
-                lstat(entry->path, &buf);
-            printf("size: %lld\n", buf.st_size);
-            entry = entry->next;
-        }
-        tmp = tmp->next;
-    }
-
+    // printf("\n==== paths ====\n");
+    return (ft_ls(paths, data));
 }
