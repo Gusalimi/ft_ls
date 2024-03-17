@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 18:12:33 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 21:36:31 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/18 00:05:59 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void get_entries(t_path *paths, t_data data) {
 	current = paths;
 	while (current) {
 		dir = opendir(current->content);
+		if (!dir)
+			fatal_error();
 		while ((entry = readdir(dir))) {
 			if (data.a || entry->d_name[0] != '.')
 			{
@@ -38,9 +40,9 @@ void get_entries(t_path *paths, t_data data) {
 					fatal_error();
 				tmp->path = entry_path;
 				if (entry->d_type == DT_LNK)
-					lstat(entry_path, &tmp->stat);
+					lstat(entry_path, &(tmp->stat));
 				else
-					stat(entry_path, &tmp->stat);
+					stat(entry_path, &(tmp->stat));
 				ft_lstadd_back_entry(&entries, tmp);
 			}
 		}

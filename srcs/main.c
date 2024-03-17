@@ -6,11 +6,12 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:58 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 22:54:13 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/18 00:10:19 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+int ft_ls(t_data data, int argc, char **argv);
 
 void reverseList(t_entry **head) {
     t_entry *prev = NULL;
@@ -74,29 +75,43 @@ void mergeSort(t_entry **head) {
     *head = merge(left, right);
 }
 
-void printList(t_entry *head) {
+void printList(t_entry *head, t_data data) {
     while (head) {
         // char modified_time[20];
         // strftime(modified_time, sizeof(modified_time), "%Y-%m-%d %H:%M:%S", localtime(&(head->stat.st_mtime)));
         // printf("%s\t%s\t%s\n", head->entry->d_name, modified_time, head->path);
-        printf("%s ", head->entry->d_name);
+        // if (data.R && head->entry->d_type == DT_DIR && strcmp(head->entry->d_name, ".") && strcmp(head->entry->d_name, "..")) {
+        //     char *new_path = ft_strjoin(head->path, "/");
+        //     char *new_argv[3] = {"./ft_ls", new_path, NULL};
+        //     ft_ls(data, 2, new_argv);
+        // }
+        // else
+            printf("%s\n", head->entry->d_name);
         head = head->next;
     }
-    printf("\n");
+    if (data.R)
+        printf("\n");
 }
 
-int ft_ls(t_path *paths, t_data data)
+int ft_ls(t_data data, int argc, char **argv)
 {
+    t_path *paths = get_paths(argc, argv);
+    get_entries(paths, data);
     t_path *tmp = paths;
     t_entry *entry = NULL;
+    printf("FT_LS %p %p\n", paths, paths->entries);
     while (tmp) {
         // printf("\n%s:\n", tmp->content);
+        if (data.R && strcmp(tmp->content, ".") && strcmp(tmp->content, ".."))
+            printf("%s:\n", tmp->content);
         entry = tmp->entries;
+        if (!entry)
+            return (1);
         if (data.t)
             mergeSort(&entry);
         if (data.r)
             reverseList(&entry);
-        printList(entry);
+        printList(entry, data);
         tmp = tmp->next;
     }
     return (0);
@@ -104,7 +119,7 @@ int ft_ls(t_path *paths, t_data data)
 
 int main(int argc, char *argv[]) {
     t_data data;
-    t_path *paths = NULL;
+    // t_path *paths = NULL;
 
     data = get_options(argc, argv);
     // printf("==== data ====\n");
@@ -114,8 +129,6 @@ int main(int argc, char *argv[]) {
     // printf("R : %d\n", data.R);
     // printf("t : %d\n", data.t);
 
-    paths = get_paths(argc, argv);
-    get_entries(paths, data);
     // printf("\n==== paths ====\n");
-    return (ft_ls(paths, data));
+    return (ft_ls(data, argc, argv));
 }

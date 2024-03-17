@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:52 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 00:18:51 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 23:54:42 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_path  *get_paths(int argc, char *argv[]) {
     i = 1;
     while (i < argc) {
         if (argv[i][0] != '-') {
-            tmp = ft_lstnew(argv[i]);
+            tmp = ft_lstnew(ft_strdup(argv[i]));
             if (!tmp) {
                 printf("malloc error\n");
                 exit(1);
@@ -71,7 +71,7 @@ t_path  *get_paths(int argc, char *argv[]) {
         i++;
     }
     if (!paths) {
-        tmp = ft_lstnew(".");
+        tmp = ft_lstnew(ft_strdup("."));
         if (!tmp) {
             printf("malloc error\n");
             exit(1);
