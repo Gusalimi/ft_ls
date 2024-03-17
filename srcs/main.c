@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:58 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 00:37:23 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:20:34 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int ft_ls(t_data data, t_path *paths) {
 int main(int argc, char *argv[]) {
     t_data data;
     t_path *paths = NULL;
+    t_entry *entry = NULL;
 
     data = get_options(argc, argv);
     printf("==== data ====\n");
@@ -52,13 +53,17 @@ int main(int argc, char *argv[]) {
     printf("t : %d\n", data.t);
 
     paths = get_paths(argc, argv);
+    get_entries(paths, data);
     t_path *tmp = paths;
     printf("\n==== paths ====\n");
     while (tmp) {
-        printf("%s\n", tmp->content);
+        printf("\n%s:\n", tmp->content);
+        entry = tmp->entries;
+        while (entry) {
+            printf("%s\n", entry->entry->d_name);
+            entry = entry->next;
+        }
         tmp = tmp->next;
     }
 
-    printf("\n==== ft_ls ====\n");
-    return ft_ls(data, paths);
 }

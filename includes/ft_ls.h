@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:45:26 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 00:37:02 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:19:35 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,6 @@ typedef struct s_data {
 // == parsing.c == //
 t_data  get_options(int argc, char *argv[]);
 t_path  *get_paths(int argc, char *argv[]);
+
+// == get_entries.c == //
+void get_entries(t_path *paths, t_data data);

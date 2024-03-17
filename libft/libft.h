@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsaile <gsaile@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 12:49:31 by gsaile            #+#    #+#             */
-/*   Updated: 2022/11/28 11:20:13 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:18:07 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,21 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <dirent.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 100
 # endif
 
+typedef struct s_entry {
+	struct dirent	*entry;
+	struct s_entry	*next;
+}					t_entry;
+
 typedef struct s_path
 {
 	char			*content;
+	t_entry			*entries;
 	struct s_path	*next;
 }					t_path;
 
@@ -74,6 +81,7 @@ void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_lstadd_front(t_path **lst, t_path *new);
 void	ft_lstadd_back(t_path **lst, t_path *new);
+void	ft_lstadd_back_entry(t_entry **lst, t_entry *new);
 void	ft_lstdelone(t_path *lst, void (*del)(void *));
 void	ft_lstclear(t_path **lst, void (*del)(void *));
 void	ft_lstiter(t_path *lst, void (*f)(void *));
@@ -86,5 +94,6 @@ t_path	*ft_lstnew(void *content);
 t_path	*ft_lstlast(t_path *lst);
 t_path	*ft_lstmap(t_path *lst, void *(*f)(void *), void (*del)(void *));
 t_path	*lst_getlast(t_path *list);
+t_entry	*ft_lstnew_entry(struct dirent *entry);
 
 #endif
