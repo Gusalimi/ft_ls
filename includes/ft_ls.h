@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:45:26 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 18:19:35 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:30:12 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,3 +67,6 @@ t_path  *get_paths(int argc, char *argv[]);
 
 // == get_entries.c == //
 void get_entries(t_path *paths, t_data data);
+
+// == error.c == //
+void fatal_error(void);

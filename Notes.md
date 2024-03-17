@@ -98,3 +98,5 @@
    - Getting stats with the function corresponding to the type of file
    - Easier print (first get all data then print)
    - Call ls on directories for `-R`
+- Get full path for `stat`
+- Store stats in `entry` linked list

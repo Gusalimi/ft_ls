@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:54:56 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 18:18:21 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:26:39 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_entry	*ft_lstnew_entry(struct dirent *entry)
 	if (list == NULL)
 		return (NULL);
 	list->entry = entry;
+	list->path = NULL;
 	list->next = NULL;
 	return (list);
 }

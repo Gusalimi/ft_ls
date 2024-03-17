@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 12:49:31 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 18:18:07 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:37:38 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <dirent.h>
+# include <sys/stat.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 100
@@ -24,6 +25,8 @@
 
 typedef struct s_entry {
 	struct dirent	*entry;
+	char 			*path;
+	struct stat		stat;
 	struct s_entry	*next;
 }					t_entry;
 

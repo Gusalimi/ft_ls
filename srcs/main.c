@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:58 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 18:20:34 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/17 21:35:03 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,12 @@ int main(int argc, char *argv[]) {
         printf("\n%s:\n", tmp->content);
         entry = tmp->entries;
         while (entry) {
-            printf("%s\n", entry->entry->d_name);
+            struct stat buf;
+            stat(entry->path, &buf);
+            printf("%s [%d]\n", entry->entry->d_name, entry->entry->d_type);
+            if (entry->entry->d_type == DT_LNK)
+                lstat(entry->path, &buf);
+            printf("size: %lld\n", buf.st_size);
             entry = entry->next;
         }
         tmp = tmp->next;
