@@ -8,7 +8,7 @@ LIBFT		= libft/libft.a
 
 # ======= COMPILATION ========
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g3# -fsanitize=address
 INCLUDE	= -I libft -I includes
 RM		= rm -rf
 

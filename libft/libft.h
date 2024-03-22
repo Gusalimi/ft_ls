@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 12:49:31 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 21:37:38 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/22 22:45:15 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef struct s_path
 	t_entry			*entries;
 	struct s_path	*next;
 }					t_path;
+
+typedef struct s_malloc
+{
+	void			*content;
+	struct s_malloc	*next;
+} t_malloc;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -82,21 +88,28 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_calloc(size_t count, size_t size);
+void	parse_arg(const char *format, va_list args, int *counter);
+void	clear_list2(t_path **current, t_path **list);
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+
+// == lists == //
 void	ft_lstadd_front(t_path **lst, t_path *new);
 void	ft_lstadd_back(t_path **lst, t_path *new);
 void	ft_lstadd_back_entry(t_entry **lst, t_entry *new);
 void	ft_lstdelone(t_path *lst, void (*del)(void *));
 void	ft_lstclear(t_path **lst, void (*del)(void *));
 void	ft_lstiter(t_path *lst, void (*f)(void *));
-void	parse_arg(const char *format, va_list args, int *counter);
-void	clear_list2(t_path **current, t_path **list);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 t_path	*ft_lstnew(void *content);
 t_path	*ft_lstlast(t_path *lst);
 t_path	*ft_lstmap(t_path *lst, void *(*f)(void *), void (*del)(void *));
 t_path	*lst_getlast(t_path *list);
 t_entry	*ft_lstnew_entry(struct dirent *entry);
+
+// == malloc == //
+extern t_malloc *mlc;
+void	*mallocpp(int size);
+void	free_all(void);
 
 #endif
