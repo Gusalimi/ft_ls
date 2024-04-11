@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:58 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/22 22:25:05 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/03/31 21:18:59 by gsaile@studen    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,30 +120,30 @@ int ft_ls(t_data data, int argc, char **argv)
     return (0);
 }
 
-// int main(int argc, char *argv[]) {
-//     t_data data;
-//     // t_path *paths = NULL;
+int main(int argc, char *argv[]) {
+    t_data data;
+    // t_path *paths = NULL;
 
-//     data = get_options(argc, argv);
-//     // printf("==== data ====\n");
-//     // printf("l : %d\n", data.l);
-//     // printf("a : %d\n", data.a);
-//     // printf("r : %d\n", data.r);
-//     // printf("R : %d\n", data.R);
-//     // printf("t : %d\n", data.t);
+    data = get_options(argc, argv);
+    // printf("==== data ====\n");
+    // printf("l : %d\n", data.l);
+    // printf("a : %d\n", data.a);
+    // printf("r : %d\n", data.r);
+    // printf("R : %d\n", data.R);
+    // printf("t : %d\n", data.t);
 
-//     // printf("\n==== paths ====\n");
-//     return (ft_ls(data, argc, argv));
-// }
-
-int main()
-{
-    int *a = mallocpp(sizeof(int));
-    *a = 12;
-    ft_printf("%d\n", *a);
-    char *s = mallocpp(5 * sizeof(char));
-    s[4] = 0;
-    for (int i = 0; i < 4; i++)
-        s[i] = i + 'a';
-    ft_printf("%s\n", s);
+    // printf("\n==== paths ====\n");
+    return (ft_ls(data, argc, argv));
 }
+
+// int main()
+// {
+//     int *a = mallocpp(sizeof(int));
+//     *a = 12;
+//     ft_printf("%d\n", *a);
+//     char *s = mallocpp(5 * sizeof(char));
+//     s[4] = 0;
+//     for (int i = 0; i < 4; i++)
+//         s[i] = i + 'a';
+//     ft_printf("%s\n", s);
+// }

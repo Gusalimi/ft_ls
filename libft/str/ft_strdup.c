@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:57:01 by gsaile            #+#    #+#             */
-/*   Updated: 2022/11/04 15:57:03 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/04/11 19:58:29 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strdup(const char *s1)
 	char	*s2;
 	int		i;
 
-	s2 = malloc((ft_strlen(s1) + 1) * sizeof(char));
+	s2 = mallocpp((ft_strlen(s1) + 1) * sizeof(char));
 	if (s2 == NULL)
 		return (NULL);
 	i = 0;

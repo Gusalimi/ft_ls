@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsaile <gsaile@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:56:47 by gsaile            #+#    #+#             */
-/*   Updated: 2022/11/26 16:08:19 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/04/11 19:58:20 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,6 @@ static int	count_words(char const *s, char c)
 	return (i);
 }
 
-char	**ft_free_split(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
-	return (NULL);
-}
-
 char	**ft_split(char const *s, char c)
 {
 	char	**ret;
@@ -74,9 +63,9 @@ char	**ft_split(char const *s, char c)
 		count_to_next = to_next_del(&tmp, c);
 		if (count_to_next)
 		{
-			ret[i] = malloc((count_to_next + 1) * sizeof(char));
+			ret[i] = mallocpp((count_to_next + 1) * sizeof(char));
 			if (ret[i] == NULL)
-				return (ft_free_split(ret));
+				return (NULL);
 			ft_strlcpy(ret[i++], tmp, count_to_next + 1);
 			tmp += count_to_next;
 		}
