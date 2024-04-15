@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:52 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/17 23:54:42 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/04/11 20:08:47 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_path  *get_paths(int argc, char *argv[]) {
             tmp = ft_lstnew(ft_strdup(argv[i]));
             if (!tmp) {
                 printf("malloc error\n");
+                free_all();
                 exit(1);
             }
             ft_lstadd_back(&paths, tmp);
@@ -74,6 +75,7 @@ t_path  *get_paths(int argc, char *argv[]) {
         tmp = ft_lstnew(ft_strdup("."));
         if (!tmp) {
             printf("malloc error\n");
+            free_all();
             exit(1);
         }
         ft_lstadd_back(&paths, tmp);

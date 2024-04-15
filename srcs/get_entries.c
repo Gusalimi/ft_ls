@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 18:12:33 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/18 00:05:59 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:40:31 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void get_entries(t_path *paths, t_data data) {
 				free(dir_path);
 				if (!dir_path || !entry_path)
 					fatal_error();
-				tmp = ft_lstnew_entry(entry);
+				tmp = ft_lstnew_entry(ft_strdup(entry->d_name), entry->d_type);
 				if (!tmp)
 					fatal_error();
 				tmp->path = entry_path;

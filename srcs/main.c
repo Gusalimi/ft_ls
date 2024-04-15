@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:58 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/31 21:18:59 by gsaile@studen    ###   ########.fr       */
+/*   Updated: 2024/04/15 15:41:38 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_entry* merge(t_entry *left, t_entry *right) {
     if (!right) return left;
 
     if (left->stat.st_mtime > right->stat.st_mtime ||
-        (left->stat.st_mtime == right->stat.st_mtime && strcmp(left->entry->d_name, right->entry->d_name) >= 0)) {
+        (left->stat.st_mtime == right->stat.st_mtime && strcmp(left->name, right->name) >= 0)) {
         left->next = merge(left->next, right);
         return left;
     } else {
@@ -82,14 +82,15 @@ void printList(t_entry *head, t_data data) {
     while (head) {
         // char modified_time[20];
         // strftime(modified_time, sizeof(modified_time), "%Y-%m-%d %H:%M:%S", localtime(&(head->stat.st_mtime)));
-        // printf("%s\t%s\t%s\n", head->entry->d_name, modified_time, head->path);
-        // if (data.R && head->entry->d_type == DT_DIR && strcmp(head->entry->d_name, ".") && strcmp(head->entry->d_name, "..")) {
-        //     char *new_path = ft_strjoin(head->path, "/");
-        //     char *new_argv[3] = {"./ft_ls", new_path, NULL};
-        //     ft_ls(data, 2, new_argv);
-        // }
-        // else
-            printf("%s\n", head->entry->d_name);
+        // printf("%s\t%s\t%s\n", head->name, modified_time, head->path);
+        if (data.R && head->type == DT_DIR && strcmp(head->name, ".") && strcmp(head->name, "..")) {
+            char *new_path = ft_strjoin(head->path, "/");
+            char *new_argv[3] = {"./ft_ls", new_path, NULL};
+            ft_ls(data, 2, new_argv);
+        }
+        else
+        // printf("1: %p\n", head->entry->d_name);
+            printf("%s\n", head->name);
         head = head->next;
     }
     if (data.R)
@@ -102,8 +103,10 @@ int ft_ls(t_data data, int argc, char **argv)
     get_entries(paths, data);
     t_path *tmp = paths;
     t_entry *entry = NULL;
-    printf("FT_LS %p %p\n", paths, paths->entries);
+    // printf("FT_LS %p %p\n", paths, paths->entries);
     while (tmp) {
+        // printf("hehe\n");
+        // printf("tmp [%p] | tmp->content [%p]\n", tmp, tmp->content);
         // printf("\n%s:\n", tmp->content);
         if (data.R && strcmp(tmp->content, ".") && strcmp(tmp->content, ".."))
             printf("%s:\n", tmp->content);

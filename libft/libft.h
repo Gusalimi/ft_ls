@@ -6,7 +6,7 @@
 /*   By: gsaile <gsaile@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 12:49:31 by gsaile            #+#    #+#             */
-/*   Updated: 2024/03/22 22:45:15 by gsaile           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:41:08 by gsaile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@
 # endif
 
 typedef struct s_entry {
-	struct dirent	*entry;
+	char			*name;
 	char 			*path;
+	int				type;
 	struct stat		stat;
 	struct s_entry	*next;
 }					t_entry;
@@ -105,7 +106,7 @@ t_path	*ft_lstnew(void *content);
 t_path	*ft_lstlast(t_path *lst);
 t_path	*ft_lstmap(t_path *lst, void *(*f)(void *), void (*del)(void *));
 t_path	*lst_getlast(t_path *list);
-t_entry	*ft_lstnew_entry(struct dirent *entry);
+t_entry	*ft_lstnew_entry(char *entry_name, int entry_type);
 
 // == malloc == //
 extern t_malloc *mlc;
