@@ -92,11 +92,13 @@
 
 # TODO
 - [ ] Create a fatal error function to free and exit properly
-- [ ] Brainstorm needed linked lists and implement corresponding functions (mainly `lstnew` and `lst_addback`)
-- [ ] Store entries in a linked list to allow
+- [x] Brainstorm needed linked lists and implement corresponding functions (mainly `lstnew` and `lst_addback`)
+- [x] Store entries in a linked list to allow
    - Sorting in reverse (`-r`), by time (`-t`) or both (`-tr`)
    - Getting stats with the function corresponding to the type of file
    - Easier print (first get all data then print)
    - Call ls on directories for `-R`
-- [ ] Get full path for `stat`
-- [ ] Store stats in `entry` linked list
+- [x] Get full path for `stat`
+- [x] Store stats in `entry` linked list
+- [ ] For the `-l` option, handle more type than directory (`d------`, `c------`, etc)
+- [ ] `printl()` works with real printf but not with mine
