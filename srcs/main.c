@@ -115,18 +115,44 @@ char *get_permissions(t_entry *entry)
     return (permissions);
 }
 
+
 void printl(t_entry *head) {
+    char *months_en[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    char *months_fr[] = {"jan", "fév", "mar", "avr", "mai", "jun", "jul", "aoû", "sep", "oct", "nov", "déc"};
+
     while (head) {
         struct passwd *pw = getpwuid(head->stat.st_uid);
         struct group  *gr = getgrgid(head->stat.st_gid);
-        printf("%s %d\t%s\t%s\t%lld\t%s\n",
+        char *time = ctime(&head->stat.st_mtime);
+        char *month = ft_substr(time, 4, 3);
+        char *day = ft_substr(time, 8, 2);
+
+        // Replace English month names with French month names
+        for (int i = 0; i < 12; i++) {
+            if (ft_strncmp(month, months_en[i], 3) == 0) {
+                int size = (i == 1 || i == 7 || i == 11) ? 5 : 4; // fév, aoû and déc have 4 characters in UTF-8
+                ft_strlcpy(month, months_fr[i], size);
+                break;
+            }
+        }
+
+        char *new_time = mallocpp(14); // Increase the size to accommodate the extra character
+        ft_strlcpy(new_time, day, 3);
+        ft_strlcat(new_time, " ", 4);
+        ft_strlcat(new_time, month, 8); // Increase the size to accommodate the extra character
+        ft_strlcat(new_time, " ", 9);
+        ft_strlcat(new_time, ft_substr(time, 11, 5), 14);
+
+        printf("%-10s %4u %-8s %-8s %4lld %s %-8s\n",
             get_permissions(head),
             head->stat.st_nlink,
             pw->pw_name,
             gr->gr_name,
             head->stat.st_size,
+            new_time,
             head->name);
         head = head->next;
+        free(new_time);
     }
 }
 
@@ -167,15 +193,3 @@ int main(int argc, char *argv[]) {
     // printf("\n==== paths ====\n");
     return (ft_ls(data, argc, argv));
 }
-
-// int main()
-// {
-//     int *a = mallocpp(sizeof(int));
-//     *a = 12;
-//     ft_printf("%d\n", *a);
-//     char *s = mallocpp(5 * sizeof(char));
-//     s[4] = 0;
-//     for (int i = 0; i < 4; i++)
-//         s[i] = i + 'a';
-//     ft_printf("%s\n", s);
-// }
